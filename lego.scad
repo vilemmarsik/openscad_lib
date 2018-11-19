@@ -10,8 +10,9 @@ roof_thickness=1.05;
 block_height=9.5;
 pin_diameter=3;		//pin for bottom blocks with width or length of 1
 //post_diameter=6.5;
-post_diameter=6.5;
-reinforcing_width=1.5;
+post_diameter=6.2;
+//reinforcing_width=1.5;
+reinforcing_width=1.2;
 axle_spline_width=2.0;
 axle_diameter=5;
 cylinder_precision=0.1;
@@ -20,7 +21,7 @@ epsilon=0.01;
 
 /*
 translate([0,-20,0])
-	lego_block(5,2,1,axle_hole=true, knobs=true);
+	lego_block(16,2,.5,axle_hole=true, knobs=true);
 
 lego_top(6,3);
 
