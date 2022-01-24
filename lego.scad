@@ -4,6 +4,7 @@
 //knob_diameter=4.8;		//knobs on top of blocks
 knob_diameter=4.8;	//knobs on top of blocks
 knob_height=2;
+//knob_spacing=7.844;
 knob_spacing=8.0;
 wall_thickness=1.45;
 roof_thickness=1.05;

@@ -45,14 +45,35 @@ module hex_row(num, d, w=0, h=1, half=0)
 	}
 }
 
+// xsize of xnum hexes in rows, hex width d
+function hex_xsize(xnum,d) =
+	0.25*hex_a(d)*(1+3*xnum);
+
+// ysize of ynum hexes in columns, hex width d
+function hex_ysize(ynum,d) =
+		d*(.5+ynum/2);
+	
+// number of hexes fitting into xsize, d=hex widht, ceils if extra, floors otherwise
+function hex_xnum(xsize,d,extra=false) =
+	let(xnum=(4*xsize/(3*hex_a(d)))-1/3)
+	extra ? ceil(xnum) : floor(xnum);
+
+// number of hexes fitting into ysize, d=hex widht, ceils if extra, floors otherwise
+function hex_ynum(ysize,d,extra=false) =
+	let(ynum=2*ysize/d - 1)
+	extra ? ceil(ynum) : floor(ynum);
+
+
 // xnum: number of half-columns in X ( only xnum/2 hexes will be shown for ynum=1)
 // ynum: number of half-rows in Y ( only ynum/2 hexes will be shown for xnum=1)
 // d: smaller width of the hex, is in Y
 // w: wall thickness
 // h: height (i.e. Z-size)
 // full: true to show half hexes at top/bottom
-module hex_field(xnum, ynum, d, w=1, h=1, full=true)
+module hex_field(xsize, ysize, d, w=1, h=1, full=true, extra=false)
 {
+	xnum=hex_xnum(xsize,d,extra);
+	ynum=hex_ynum(ysize,d,extra);
 	x1=floor((xnum+1)/2);
 	x2=floor(xnum/2);
 	xstep=d*sqrt(3)/2;
@@ -77,24 +98,6 @@ module hex_field(xnum, ynum, d, w=1, h=1, full=true)
 				hex_row(x2, d, w, h, 2);
 	}
 }
-
-// xsize of xnum hexes in rows, hex width d
-function hex_xsize(xnum,d) =
-	0.25*hex_a(d)*(1+3*xnum);
-
-// ysize of ynum hexes in columns, hex width d
-function hex_ysize(ynum,d) =
-		d*(.5+ynum/2);
-	
-// number of hexes fitting into xsize, d=hex widht, ceils if extra, floors otherwise
-function hex_xnum(xsize,d,extra=false) =
-	let(xnum=(4*xsize/(3*hex_a(d)))-1/3)
-	extra ? ceil(xnum) : floor(xnum);
-
-// number of hexes fitting into ysize, d=hex widht, ceils if extra, floors otherwise
-function hex_ynum(ysize,d,extra=false) =
-	let(ynum=2*ysize/d - 1)
-	extra ? ceil(ynum) : floor(ynum);
 
 
 /*
